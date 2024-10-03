@@ -1412,11 +1412,11 @@ print(" - Masking Roi tables: ", ngff_image.table.list(type='masking_roi_table')
 </div>
 <div class="highlight-ipynb hl-python"><pre><span></span><span class="c1"># Loading a table</span>
 <span class="n">feature_table</span> <span class="o">=</span> <span class="n">ngff_image</span><span class="o">.</span><span class="n">table</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"regionprops_DAPI"</span><span class="p">)</span>
-<span class="n">feature_table</span><span class="o">.</span><span class="n">data_frame</span>
+<span class="n">feature_table</span><span class="o">.</span><span class="n">table</span>
 </pre></div>
 <div class="clipboard-copy-txt" id="cell-6"># Loading a table
 feature_table = ngff_image.table.get("regionprops_DAPI")
-feature_table.data_frame</div>
+feature_table.table</div>
 </div>
 </div>
 </div>
@@ -1433,18 +1433,161 @@ feature_table.data_frame</div>
 </pre>
 </div>
 </div>
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>
-<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
-<span class="ansi-red-fg">AttributeError</span>                            Traceback (most recent call last)
-Cell <span class="ansi-green-fg">In[6], line 3</span>
-<span class="ansi-green-intense-fg ansi-bold">      1</span> <span style="color: rgb(95,135,135)"># Loading a table</span>
-<span class="ansi-green-intense-fg ansi-bold">      2</span> feature_table <span style="color: rgb(98,98,98)">=</span> ngff_image<span style="color: rgb(98,98,98)">.</span>table<span style="color: rgb(98,98,98)">.</span>get(<span style="color: rgb(175,0,0)">"</span><span style="color: rgb(175,0,0)">regionprops_DAPI</span><span style="color: rgb(175,0,0)">"</span>)
-<span class="ansi-green-fg">----&gt; 3</span> <span class="ansi-yellow-bg">feature_table</span><span class="ansi-yellow-bg" style="color: rgb(98,98,98)">.</span><span class="ansi-yellow-bg">data_frame</span>
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[6]:</div>
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
 
-<span class="ansi-red-fg">AttributeError</span>: 'FeatureTableV1' object has no attribute 'data_frame'</pre>
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th></th>
+<th>area</th>
+<th>bbox_area</th>
+<th>equivalent_diameter</th>
+<th>max_intensity</th>
+<th>mean_intensity</th>
+<th>min_intensity</th>
+<th>standard_deviation_intensity</th>
+</tr>
+<tr>
+<th>label</th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>1</th>
+<td>2120.0</td>
+<td>2655.0</td>
+<td>15.938437</td>
+<td>476.0</td>
+<td>278.635864</td>
+<td>86.0</td>
+<td>54.343792</td>
+</tr>
+<tr>
+<th>2</th>
+<td>327.0</td>
+<td>456.0</td>
+<td>8.547709</td>
+<td>604.0</td>
+<td>324.162079</td>
+<td>118.0</td>
+<td>90.847092</td>
+</tr>
+<tr>
+<th>3</th>
+<td>1381.0</td>
+<td>1749.0</td>
+<td>13.816510</td>
+<td>386.0</td>
+<td>212.682114</td>
+<td>60.0</td>
+<td>50.169601</td>
+</tr>
+<tr>
+<th>4</th>
+<td>2566.0</td>
+<td>3588.0</td>
+<td>16.985800</td>
+<td>497.0</td>
+<td>251.731491</td>
+<td>61.0</td>
+<td>53.307186</td>
+</tr>
+<tr>
+<th>5</th>
+<td>4201.0</td>
+<td>5472.0</td>
+<td>20.019413</td>
+<td>466.0</td>
+<td>223.862885</td>
+<td>51.0</td>
+<td>56.719025</td>
+</tr>
+<tr>
+<th>...</th>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr>
+<th>3002</th>
+<td>1026.0</td>
+<td>1288.0</td>
+<td>12.513618</td>
+<td>589.0</td>
+<td>308.404480</td>
+<td>132.0</td>
+<td>64.681778</td>
+</tr>
+<tr>
+<th>3003</th>
+<td>859.0</td>
+<td>1080.0</td>
+<td>11.794101</td>
+<td>400.0</td>
+<td>270.349243</td>
+<td>107.0</td>
+<td>49.040470</td>
+</tr>
+<tr>
+<th>3004</th>
+<td>508.0</td>
+<td>660.0</td>
+<td>9.899693</td>
+<td>314.0</td>
+<td>205.043304</td>
+<td>82.0</td>
+<td>33.249981</td>
+</tr>
+<tr>
+<th>3005</th>
+<td>369.0</td>
+<td>440.0</td>
+<td>8.899028</td>
+<td>376.0</td>
+<td>217.970184</td>
+<td>82.0</td>
+<td>50.978519</td>
+</tr>
+<tr>
+<th>3006</th>
+<td>278.0</td>
+<td>330.0</td>
+<td>8.097459</td>
+<td>339.0</td>
+<td>217.996399</td>
+<td>100.0</td>
+<td>38.510067</td>
+</tr>
+</tbody>
+</table>
+<p>3006 rows × 7 columns</p>
+</div>
 </div>
 </div>
 </div>
@@ -1475,7 +1618,7 @@ Cell <span class="ansi-green-fg">In[6], line 3</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">roi_table</span><span class="o">.</span><span class="n">list_field_indexes</span><span class="si">=}</span><span class="s2">"</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">roi_table</span><span class="o">.</span><span class="n">get_roi</span><span class="p">(</span><span class="s2">"FOV_1"</span><span class="p">)</span><span class="si">=}</span><span class="s2">"</span><span class="p">)</span>
 
-<span class="n">roi_table</span><span class="o">.</span><span class="n">data_frame</span>
+<span class="n">roi_table</span><span class="o">.</span><span class="n">table</span>
 </pre></div>
 <div class="clipboard-copy-txt" id="cell-7"># Loading a roi table
 roi_table = ngff_image.table.get("FOV_ROI_table")
@@ -1483,7 +1626,7 @@ roi_table = ngff_image.table.get("FOV_ROI_table")
 print(f"{roi_table.list_field_indexes=}")
 print(f"{roi_table.get_roi("FOV_1")=}")
 
-roi_table.data_frame</div>
+roi_table.table</div>
 </div>
 </div>
 </div>
@@ -1500,18 +1643,96 @@ roi_table.get_roi("FOV_1")=WorldCooROI(x_length=416.0, y_length=351.0, z_length=
 </pre>
 </div>
 </div>
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>
-<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
-<span class="ansi-red-fg">AttributeError</span>                            Traceback (most recent call last)
-Cell <span class="ansi-green-fg">In[7], line 7</span>
-<span class="ansi-green-intense-fg ansi-bold">      4</span> <span style="color: rgb(0,135,0)">print</span>(<span style="color: rgb(175,0,0)">f</span><span style="color: rgb(175,0,0)">"</span><span class="ansi-bold" style="color: rgb(175,95,135)">{</span>roi_table<span style="color: rgb(98,98,98)">.</span>list_field_indexes<span class="ansi-bold" style="color: rgb(175,95,135)">=}</span><span style="color: rgb(175,0,0)">"</span>)
-<span class="ansi-green-intense-fg ansi-bold">      5</span> <span style="color: rgb(0,135,0)">print</span>(<span style="color: rgb(175,0,0)">f</span><span style="color: rgb(175,0,0)">"</span><span class="ansi-bold" style="color: rgb(175,95,135)">{</span>roi_table<span style="color: rgb(98,98,98)">.</span>get_roi(<span style="color: rgb(175,0,0)">"</span><span style="color: rgb(175,0,0)">FOV_1</span><span style="color: rgb(175,0,0)">"</span>)<span class="ansi-bold" style="color: rgb(175,95,135)">=}</span><span style="color: rgb(175,0,0)">"</span>)
-<span class="ansi-green-fg">----&gt; 7</span> <span class="ansi-yellow-bg">roi_table</span><span class="ansi-yellow-bg" style="color: rgb(98,98,98)">.</span><span class="ansi-yellow-bg">data_frame</span>
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[7]:</div>
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
 
-<span class="ansi-red-fg">AttributeError</span>: 'ROITableV1' object has no attribute 'data_frame'</pre>
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th></th>
+<th>x_micrometer</th>
+<th>y_micrometer</th>
+<th>z_micrometer</th>
+<th>len_x_micrometer</th>
+<th>len_y_micrometer</th>
+<th>len_z_micrometer</th>
+<th>x_micrometer_original</th>
+<th>y_micrometer_original</th>
+</tr>
+<tr>
+<th>FieldIndex</th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>FOV_1</th>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>416.0</td>
+<td>351.0</td>
+<td>1.0</td>
+<td>-1448.300049</td>
+<td>-1517.699951</td>
+</tr>
+<tr>
+<th>FOV_2</th>
+<td>416.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>416.0</td>
+<td>351.0</td>
+<td>1.0</td>
+<td>-1032.300049</td>
+<td>-1517.699951</td>
+</tr>
+<tr>
+<th>FOV_3</th>
+<td>0.0</td>
+<td>351.0</td>
+<td>0.0</td>
+<td>416.0</td>
+<td>351.0</td>
+<td>1.0</td>
+<td>-1448.300049</td>
+<td>-1166.699951</td>
+</tr>
+<tr>
+<th>FOV_4</th>
+<td>416.0</td>
+<td>351.0</td>
+<td>0.0</td>
+<td>416.0</td>
+<td>351.0</td>
+<td>1.0</td>
+<td>-1032.300049</td>
+<td>-1166.699951</td>
+</tr>
+</tbody>
+</table>
+</div>
 </div>
 </div>
 </div>
@@ -1576,6 +1797,33 @@ print(f"{new_ngff_image.num_levels=}")</div>
 new_ngff_image.levels_paths=['0', '1', '2', '3', '4']
 new_ngff_image.num_levels=5
 </pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="CodeMirror cm-s-jupyter">
+<div class="zeroclipboard-container">
+<clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-9">
+<div>
+<span class="notice" hidden="">Copied!</span>
+<svg aria-hidden="true" class="clipboard-copy-icon" data-view-component="true" height="20" version="1.1" viewbox="0 0 16 16" width="20">
+<path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z" fill="currentColor" fill-rule="evenodd"></path>
+<path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z" fill="currentColor" fill-rule="evenodd"></path>
+</svg>
+</div>
+</clipboard-copy>
+</div>
+<div class="highlight-ipynb hl-python"><pre><span></span>
+</pre></div>
+<div class="clipboard-copy-txt" id="cell-9"></div>
 </div>
 </div>
 </div>
