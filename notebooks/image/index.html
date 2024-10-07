@@ -1170,7 +1170,7 @@ image.shape=(3, 1, 4320, 5120)
 image.axes_names=['c', 'z', 'y', 'x']
 image.pixel_size=PixelSize(x=0.1625, y=0.1625, z=1.0, unit=micrometer)
 image.channel_labels=['DAPI', 'nanog', 'Lamin B1']
-image.dimensions=&lt;ngio.core.dimensions.Dimensions object at 0x7fd6482ce330&gt;
+image.dimensions=&lt;ngio.core.dimensions.Dimensions object at 0x7fa5871dd4c0&gt;
 </pre>
 </div>
 </div>
@@ -1998,122 +1998,33 @@ feat_table.table</div>
 </div>
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>New list of feature table: ['regionprops_DAPI', 'nuclei_measurements_wf3', 'nuclei_measurements_wf4', 'nuclei_lamin_measurements_wf4', 'new_feature_table']
-</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>/opt/hostedtoolcache/Python/3.12.6/x64/lib/python3.12/site-packages/anndata/_core/anndata.py:1754: UserWarning: Observation names are not unique. To make them unique, call `.obs_names_make_unique`.
-  utils.warn_names_duplicates("obs")
-</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[10]:</div>
-<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
-<div>
-<style scoped="">
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
+<pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">TypeError</span>                                 Traceback (most recent call last)
+Cell <span class="ansi-green-fg">In[10], line 24</span>
+<span class="ansi-green-intense-fg ansi-bold">     21</span> feat_df <span style="color: rgb(98,98,98)">=</span> pd<span style="color: rgb(98,98,98)">.</span>DataFrame<span style="color: rgb(98,98,98)">.</span>from_records(list_of_records)
+<span class="ansi-green-intense-fg ansi-bold">     23</span> <span style="color: rgb(95,135,135)"># Create a new feature table</span>
+<span class="ansi-green-fg">---&gt; 24</span> feat_table <span style="color: rgb(98,98,98)">=</span> <span class="ansi-yellow-bg">ngff_image</span><span class="ansi-yellow-bg" style="color: rgb(98,98,98)">.</span><span class="ansi-yellow-bg">table</span><span class="ansi-yellow-bg" style="color: rgb(98,98,98)">.</span><span class="ansi-yellow-bg">new</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">name</span><span class="ansi-yellow-bg" style="color: rgb(98,98,98)">=</span><span class="ansi-yellow-bg" style="color: rgb(175,0,0)">'</span><span class="ansi-yellow-bg" style="color: rgb(175,0,0)">new_feature_table</span><span class="ansi-yellow-bg" style="color: rgb(175,0,0)">'</span><span class="ansi-yellow-bg">,</span>
+<span class="ansi-green-intense-fg ansi-bold">     25</span> <span class="ansi-yellow-bg">                     </span><span class="ansi-yellow-bg">region</span><span class="ansi-yellow-bg" style="color: rgb(98,98,98)">=</span><span class="ansi-yellow-bg" style="color: rgb(175,0,0)">'</span><span class="ansi-yellow-bg" style="color: rgb(175,0,0)">../nuclei</span><span class="ansi-yellow-bg" style="color: rgb(175,0,0)">'</span><span class="ansi-yellow-bg">,</span>
+<span class="ansi-green-intense-fg ansi-bold">     26</span> <span class="ansi-yellow-bg">                     </span><span class="ansi-yellow-bg">table_type</span><span class="ansi-yellow-bg" style="color: rgb(98,98,98)">=</span><span class="ansi-yellow-bg" style="color: rgb(175,0,0)">'</span><span class="ansi-yellow-bg" style="color: rgb(175,0,0)">feature_table</span><span class="ansi-yellow-bg" style="color: rgb(175,0,0)">'</span><span class="ansi-yellow-bg">,</span>
+<span class="ansi-green-intense-fg ansi-bold">     27</span> <span class="ansi-yellow-bg">                     </span><span class="ansi-yellow-bg">overwrite</span><span class="ansi-yellow-bg" style="color: rgb(98,98,98)">=</span><span class="ansi-yellow-bg ansi-bold" style="color: rgb(0,135,0)">True</span><span class="ansi-yellow-bg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">     29</span> <span style="color: rgb(0,135,0)">print</span>(<span style="color: rgb(175,0,0)">f</span><span style="color: rgb(175,0,0)">"</span><span style="color: rgb(175,0,0)">New list of feature table: </span><span class="ansi-bold" style="color: rgb(175,95,135)">{</span>ngff_image<span style="color: rgb(98,98,98)">.</span>table<span style="color: rgb(98,98,98)">.</span>list(<span style="color: rgb(0,135,0)">type</span><span style="color: rgb(98,98,98)">=</span><span style="color: rgb(175,0,0)">'</span><span style="color: rgb(175,0,0)">feature_table</span><span style="color: rgb(175,0,0)">'</span>)<span class="ansi-bold" style="color: rgb(175,95,135)">}</span><span style="color: rgb(175,0,0)">"</span>)
+<span class="ansi-green-intense-fg ansi-bold">     30</span> feat_table<span style="color: rgb(98,98,98)">.</span>table <span style="color: rgb(98,98,98)">=</span> feat_df
 
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
+File <span class="ansi-green-fg">/opt/hostedtoolcache/Python/3.12.6/x64/lib/python3.12/site-packages/ngio/tables/tables_group.py:146</span>, in <span class="ansi-cyan-fg">TableGroup.new</span><span class="ansi-blue-fg">(self, name, table_type, overwrite, version, **type_specific_kwargs)</span>
+<span class="ansi-green-intense-fg ansi-bold">    143</span>     list_of_tables<span style="color: rgb(98,98,98)">.</span>remove(name)
+<span class="ansi-green-intense-fg ansi-bold">    145</span> table_impl <span style="color: rgb(98,98,98)">=</span> _find_table_impl(table_type<span style="color: rgb(98,98,98)">=</span>table_type, version<span style="color: rgb(98,98,98)">=</span>version)
+<span class="ansi-green-fg">--&gt; 146</span> new_table <span style="color: rgb(98,98,98)">=</span> <span class="ansi-yellow-bg">table_impl</span><span class="ansi-yellow-bg" style="color: rgb(98,98,98)">.</span><span class="ansi-yellow-bg">_new</span><span class="ansi-yellow-bg">(</span>
+<span class="ansi-green-intense-fg ansi-bold">    147</span> <span class="ansi-yellow-bg">    </span><span class="ansi-yellow-bg">parent_group</span><span class="ansi-yellow-bg" style="color: rgb(98,98,98)">=</span><span class="ansi-yellow-bg" style="color: rgb(0,135,0)">self</span><span class="ansi-yellow-bg" style="color: rgb(98,98,98)">.</span><span class="ansi-yellow-bg">_group</span><span class="ansi-yellow-bg">,</span>
+<span class="ansi-green-intense-fg ansi-bold">    148</span> <span class="ansi-yellow-bg">    </span><span class="ansi-yellow-bg">name</span><span class="ansi-yellow-bg" style="color: rgb(98,98,98)">=</span><span class="ansi-yellow-bg">name</span><span class="ansi-yellow-bg">,</span>
+<span class="ansi-green-intense-fg ansi-bold">    149</span> <span class="ansi-yellow-bg">    </span><span class="ansi-yellow-bg">overwrite</span><span class="ansi-yellow-bg" style="color: rgb(98,98,98)">=</span><span class="ansi-yellow-bg">overwrite</span><span class="ansi-yellow-bg">,</span>
+<span class="ansi-green-intense-fg ansi-bold">    150</span> <span class="ansi-yellow-bg">    </span><span class="ansi-yellow-bg" style="color: rgb(98,98,98)">*</span><span class="ansi-yellow-bg" style="color: rgb(98,98,98)">*</span><span class="ansi-yellow-bg">type_specific_kwargs</span><span class="ansi-yellow-bg">,</span>
+<span class="ansi-green-intense-fg ansi-bold">    151</span> <span class="ansi-yellow-bg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    153</span> <span style="color: rgb(0,135,0)">self</span><span style="color: rgb(98,98,98)">.</span>_group<span style="color: rgb(98,98,98)">.</span>attrs[<span style="color: rgb(175,0,0)">"</span><span style="color: rgb(175,0,0)">tables</span><span style="color: rgb(175,0,0)">"</span>] <span style="color: rgb(98,98,98)">=</span> [<span style="color: rgb(98,98,98)">*</span>list_of_tables, name]
+<span class="ansi-green-intense-fg ansi-bold">    155</span> <span class="ansi-bold" style="color: rgb(0,135,0)">return</span> new_table
 
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-<thead>
-<tr style="text-align: right;">
-<th></th>
-<th>feat1</th>
-<th>feat2</th>
-<th>ROI</th>
-</tr>
-<tr>
-<th>label</th>
-<th></th>
-<th></th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<th>1</th>
-<td>0.704074</td>
-<td>0.061293</td>
-<td>FOV_1</td>
-</tr>
-<tr>
-<th>2</th>
-<td>0.712494</td>
-<td>0.104550</td>
-<td>FOV_1</td>
-</tr>
-<tr>
-<th>3</th>
-<td>0.537583</td>
-<td>0.459860</td>
-<td>FOV_1</td>
-</tr>
-<tr>
-<th>4</th>
-<td>0.942426</td>
-<td>0.258381</td>
-<td>FOV_1</td>
-</tr>
-<tr>
-<th>5</th>
-<td>0.509777</td>
-<td>0.731621</td>
-<td>FOV_1</td>
-</tr>
-<tr>
-<th>...</th>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-</tr>
-<tr>
-<th>2987</th>
-<td>0.873111</td>
-<td>0.132960</td>
-<td>FOV_4</td>
-</tr>
-<tr>
-<th>2991</th>
-<td>0.880896</td>
-<td>0.571805</td>
-<td>FOV_4</td>
-</tr>
-<tr>
-<th>2993</th>
-<td>0.293922</td>
-<td>0.906001</td>
-<td>FOV_4</td>
-</tr>
-<tr>
-<th>2995</th>
-<td>0.185383</td>
-<td>0.391564</td>
-<td>FOV_4</td>
-</tr>
-<tr>
-<th>2996</th>
-<td>0.228347</td>
-<td>0.364058</td>
-<td>FOV_4</td>
-</tr>
-</tbody>
-</table>
-<p>3091 rows × 3 columns</p>
-</div>
+<span class="ansi-red-fg">TypeError</span>: FeatureTableV1._new() got an unexpected keyword argument 'region'</pre>
 </div>
 </div>
 </div>
@@ -2176,7 +2087,7 @@ feat_table.table</div>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">October 3, 2024</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">October 7, 2024</span>
   </span>
 
     
@@ -2186,7 +2097,7 @@ feat_table.table</div>
     <span class="md-icon" title="Created">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14.47 15.08 11 13V7h1.5v5.25l3.08 1.83c-.41.28-.79.62-1.11 1m-1.39 4.84c-.36.05-.71.08-1.08.08-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8c0 .37-.03.72-.08 1.08.69.1 1.33.32 1.92.64.1-.56.16-1.13.16-1.72 0-5.5-4.5-10-10-10S2 6.5 2 12s4.47 10 10 10c.59 0 1.16-.06 1.72-.16-.32-.59-.54-1.23-.64-1.92M18 15v3h-3v2h3v3h2v-3h3v-2h-3v-3z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">October 3, 2024</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">October 7, 2024</span>
   </span>
 
     
