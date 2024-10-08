@@ -1170,7 +1170,7 @@ image.shape=(3, 1, 4320, 5120)
 image.axes_names=['c', 'z', 'y', 'x']
 image.pixel_size=PixelSize(x=0.1625, y=0.1625, z=1.0, unit=micrometer)
 image.channel_labels=['DAPI', 'nanog', 'Lamin B1']
-image.dimensions=&lt;ngio.core.dimensions.Dimensions object at 0x7f65aed0d400&gt;
+image.dimensions=&lt;ngio.core.dimensions.Dimensions object at 0x7f620b34ce90&gt;
 </pre>
 </div>
 </div>
@@ -2012,7 +2012,7 @@ Cell <span class="ansi-green-fg">In[10], line 24</span>
 <span class="ansi-green-intense-fg ansi-bold">     29</span> <span style="color: rgb(0,135,0)">print</span>(<span style="color: rgb(175,0,0)">f</span><span style="color: rgb(175,0,0)">"</span><span style="color: rgb(175,0,0)">New list of feature table: </span><span class="ansi-bold" style="color: rgb(175,95,135)">{</span>ngff_image<span style="color: rgb(98,98,98)">.</span>table<span style="color: rgb(98,98,98)">.</span>list(<span style="color: rgb(0,135,0)">type</span><span style="color: rgb(98,98,98)">=</span><span style="color: rgb(175,0,0)">'</span><span style="color: rgb(175,0,0)">feature_table</span><span style="color: rgb(175,0,0)">'</span>)<span class="ansi-bold" style="color: rgb(175,95,135)">}</span><span style="color: rgb(175,0,0)">"</span>)
 <span class="ansi-green-intense-fg ansi-bold">     30</span> feat_table<span style="color: rgb(98,98,98)">.</span>table <span style="color: rgb(98,98,98)">=</span> feat_df
 
-File <span class="ansi-green-fg">/opt/hostedtoolcache/Python/3.12.6/x64/lib/python3.12/site-packages/ngio/tables/tables_group.py:146</span>, in <span class="ansi-cyan-fg">TableGroup.new</span><span class="ansi-blue-fg">(self, name, table_type, overwrite, version, **type_specific_kwargs)</span>
+File <span class="ansi-green-fg">/opt/hostedtoolcache/Python/3.12.7/x64/lib/python3.12/site-packages/ngio/tables/tables_group.py:146</span>, in <span class="ansi-cyan-fg">TableGroup.new</span><span class="ansi-blue-fg">(self, name, table_type, overwrite, version, **type_specific_kwargs)</span>
 <span class="ansi-green-intense-fg ansi-bold">    143</span>     list_of_tables<span style="color: rgb(98,98,98)">.</span>remove(name)
 <span class="ansi-green-intense-fg ansi-bold">    145</span> table_impl <span style="color: rgb(98,98,98)">=</span> _find_table_impl(table_type<span style="color: rgb(98,98,98)">=</span>table_type, version<span style="color: rgb(98,98,98)">=</span>version)
 <span class="ansi-green-fg">--&gt; 146</span> new_table <span style="color: rgb(98,98,98)">=</span> <span class="ansi-yellow-bg">table_impl</span><span class="ansi-yellow-bg" style="color: rgb(98,98,98)">.</span><span class="ansi-yellow-bg">_new</span><span class="ansi-yellow-bg">(</span>
