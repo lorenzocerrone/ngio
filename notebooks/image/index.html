@@ -1170,7 +1170,7 @@ image.shape=(3, 1, 4320, 5120)
 image.axes_names=['c', 'z', 'y', 'x']
 image.pixel_size=PixelSize(x=0.1625, y=0.1625, z=1.0, unit=micrometer)
 image.channel_labels=['DAPI', 'nanog', 'Lamin B1']
-image.dimensions=&lt;ngio.core.dimensions.Dimensions object at 0x7f3250a210d0&gt;
+image.dimensions=&lt;ngio.core.dimensions.Dimensions object at 0x7fd1ea251580&gt;
 </pre>
 </div>
 </div>
@@ -1219,17 +1219,11 @@ To get the image data from disk we can use the <code>.array</code> attribute or 
 </div>
 </clipboard-copy>
 </div>
-<div class="highlight-ipynb hl-python"><pre><span></span><span class="c1"># Get image as a zarr.Array</span>
-<span class="n">array</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">array</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">array</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-
+<div class="highlight-ipynb hl-python"><pre><span></span><span class="c1"># Get image as a dask array</span>
 <span class="n">dask_array</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">on_disk_dask_array</span>
 <span class="n">dask_array</span>
 </pre></div>
-<div class="clipboard-copy-txt" id="cell-3"># Get image as a zarr.Array
-array = image.array
-print(f"{array}")
-
+<div class="clipboard-copy-txt" id="cell-3"># Get image as a dask array
 dask_array = image.on_disk_dask_array
 dask_array</div>
 </div>
@@ -1240,13 +1234,6 @@ dask_array</div>
 <div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>&lt;bound method ImageLike.array of &lt;ngio.core.image_handler.Image object at 0x7f329c81d340&gt;&gt;
-</pre>
-</div>
-</div>
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
 <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[3]:</div>
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
@@ -1347,7 +1334,7 @@ dask_array</div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <p>Note, directly accessing the <code>.on_disk_array</code> or <code>.on_disk_dask_array</code> attributes will load the image as stored in the file.</p>
-<p>Since in principle the images can have different axes order. A safer way to access the image data is to use the <code>.array</code> method, which will return the image data in canonical order (TCZYX).</p>
+<p>Since in principle the images can have different axes order. A safer way to access the image data is to use the <code>.get_array()</code> method, which will return the image data in canonical order (TCZYX).</p>
 </div>
 </div>
 </div>
@@ -1370,11 +1357,11 @@ dask_array</div>
 </div>
 </clipboard-copy>
 </div>
-<div class="highlight-ipynb hl-python"><pre><span></span><span class="n">image_numpy</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">c</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="nb">slice</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">250</span><span class="p">),</span> <span class="n">y</span><span class="o">=</span><span class="nb">slice</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">250</span><span class="p">),</span> <span class="n">preserve_dimensions</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">"numpy"</span><span class="p">)</span>
+<div class="highlight-ipynb hl-python"><pre><span></span><span class="n">image_numpy</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">get_array</span><span class="p">(</span><span class="n">c</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="nb">slice</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">250</span><span class="p">),</span> <span class="n">y</span><span class="o">=</span><span class="nb">slice</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">250</span><span class="p">),</span> <span class="n">preserve_dimensions</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">"numpy"</span><span class="p">)</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">image_numpy</span><span class="o">.</span><span class="n">shape</span><span class="si">=}</span><span class="s2">"</span><span class="p">)</span>
 </pre></div>
-<div class="clipboard-copy-txt" id="cell-4">image_numpy = image.array(c=0, x=slice(0, 250), y=slice(0, 250), preserve_dimensions=False, mode="numpy")
+<div class="clipboard-copy-txt" id="cell-4">image_numpy = image.get_array(c=0, x=slice(0, 250), y=slice(0, 250), preserve_dimensions=False, mode="numpy")
 
 print(f"{image_numpy.shape=}")</div>
 </div>
@@ -1425,18 +1412,18 @@ print(f"{image_numpy.shape=}")</div>
 </div>
 </clipboard-copy>
 </div>
-<div class="highlight-ipynb hl-python"><pre><span></span><span class="n">roi_table</span> <span class="o">=</span> <span class="n">ngff_image</span><span class="o">.</span><span class="n">table</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"FOV_ROI_table"</span><span class="p">)</span>
+<div class="highlight-ipynb hl-python"><pre><span></span><span class="n">roi_table</span> <span class="o">=</span> <span class="n">ngff_image</span><span class="o">.</span><span class="n">table</span><span class="o">.</span><span class="n">get_table</span><span class="p">(</span><span class="s2">"FOV_ROI_table"</span><span class="p">)</span>
 <span class="n">roi</span> <span class="o">=</span> <span class="n">roi_table</span><span class="o">.</span><span class="n">get_roi</span><span class="p">(</span><span class="s2">"FOV_1"</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">roi</span><span class="si">=}</span><span class="s2">"</span><span class="p">)</span>
 
-<span class="n">image_roi_1</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">array_from_roi</span><span class="p">(</span><span class="n">roi</span><span class="o">=</span><span class="n">roi</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">preserve_dimensions</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">"dask"</span><span class="p">)</span>
+<span class="n">image_roi_1</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">get_array_from_roi</span><span class="p">(</span><span class="n">roi</span><span class="o">=</span><span class="n">roi</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">preserve_dimensions</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">"dask"</span><span class="p">)</span>
 <span class="n">image_roi_1</span>
 </pre></div>
-<div class="clipboard-copy-txt" id="cell-5">roi_table = ngff_image.table.get("FOV_ROI_table")
+<div class="clipboard-copy-txt" id="cell-5">roi_table = ngff_image.table.get_table("FOV_ROI_table")
 roi = roi_table.get_roi("FOV_1")
 print(f"{roi=}")
 
-image_roi_1 = image.array_from_roi(roi=roi, c=0, preserve_dimensions=True, mode="dask")
+image_roi_1 = image.get_array_from_roi(roi=roi, c=0, preserve_dimensions=True, mode="dask")
 image_roi_1</div>
 </div>
 </div>
@@ -1575,10 +1562,10 @@ image_roi_1</div>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">image_2</span><span class="o">.</span><span class="n">pixel_size</span><span class="si">=}</span><span class="s2">"</span><span class="p">)</span>
 
 <span class="c1"># Get roi for higher resolution image</span>
-<span class="n">image_1_roi_1</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">array_from_roi</span><span class="p">(</span><span class="n">roi</span><span class="o">=</span><span class="n">roi</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">preserve_dimensions</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">image_1_roi_1</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">get_array_from_roi</span><span class="p">(</span><span class="n">roi</span><span class="o">=</span><span class="n">roi</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">preserve_dimensions</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
 <span class="c1"># Get roi for lower resolution image</span>
-<span class="n">image_2_roi_1</span> <span class="o">=</span> <span class="n">image_2</span><span class="o">.</span><span class="n">array_from_roi</span><span class="p">(</span><span class="n">roi</span><span class="o">=</span><span class="n">roi</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">preserve_dimensions</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">image_2_roi_1</span> <span class="o">=</span> <span class="n">image_2</span><span class="o">.</span><span class="n">get_array_from_roi</span><span class="p">(</span><span class="n">roi</span><span class="o">=</span><span class="n">roi</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">preserve_dimensions</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
 <span class="c1"># Plot the two images side by side</span>
 <span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
@@ -1592,10 +1579,10 @@ print(f"{image.pixel_size=}")
 print(f"{image_2.pixel_size=}")
 
 # Get roi for higher resolution image
-image_1_roi_1 = image.array_from_roi(roi=roi, c=0, preserve_dimensions=False)
+image_1_roi_1 = image.get_array_from_roi(roi=roi, c=0, preserve_dimensions=False)
 
 # Get roi for lower resolution image
-image_2_roi_1 = image_2.array_from_roi(roi=roi, c=0, preserve_dimensions=False)
+image_2_roi_1 = image_2.get_array_from_roi(roi=roi, c=0, preserve_dimensions=False)
 
 # Plot the two images side by side
 fig, axs = plt.subplots(1, 2, figsize=(10, 5))
@@ -1660,7 +1647,7 @@ image_2.pixel_size=PixelSize(x=0.65, y=0.65, z=1.0, unit=micrometer)
 <div class="highlight-ipynb hl-python"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
 <span class="c1"># Get a small slice of the image</span>
-<span class="n">small_slice</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="nb">slice</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">2000</span><span class="p">),</span> <span class="n">y</span><span class="o">=</span><span class="nb">slice</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">2000</span><span class="p">))</span>
+<span class="n">small_slice</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">get_array</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="nb">slice</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">2000</span><span class="p">),</span> <span class="n">y</span><span class="o">=</span><span class="nb">slice</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">2000</span><span class="p">))</span>
 
 <span class="c1"># Set the sample slice to zeros</span>
 <span class="n">zeros_slice</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">small_slice</span><span class="p">)</span>
@@ -1668,7 +1655,7 @@ image_2.pixel_size=PixelSize(x=0.65, y=0.65, z=1.0, unit=micrometer)
 
 
 <span class="c1"># Load the image from disk and show the edited image</span>
-<span class="n">nuclei</span> <span class="o">=</span> <span class="n">ngff_image</span><span class="o">.</span><span class="n">label</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"nuclei"</span><span class="p">)</span>
+<span class="n">nuclei</span> <span class="o">=</span> <span class="n">ngff_image</span><span class="o">.</span><span class="n">label</span><span class="o">.</span><span class="n">get_label</span><span class="p">(</span><span class="s2">"nuclei"</span><span class="p">)</span>
 <span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
 <span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">image</span><span class="o">.</span><span class="n">on_disk_array</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">"gray"</span><span class="p">)</span>
 <span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">nuclei</span><span class="o">.</span><span class="n">on_disk_array</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
@@ -1683,7 +1670,7 @@ image_2.pixel_size=PixelSize(x=0.65, y=0.65, z=1.0, unit=micrometer)
 <div class="clipboard-copy-txt" id="cell-7">import numpy as np
 
 # Get a small slice of the image
-small_slice = image.array(x=slice(1000, 2000), y=slice(1000, 2000))
+small_slice = image.get_array(x=slice(1000, 2000), y=slice(1000, 2000))
 
 # Set the sample slice to zeros
 zeros_slice = np.zeros_like(small_slice)
@@ -1691,7 +1678,7 @@ image.set_array(patch=zeros_slice, x=slice(1000, 2000), y=slice(1000, 2000))
 
 
 # Load the image from disk and show the edited image
-nuclei = ngff_image.label.get("nuclei")
+nuclei = ngff_image.label.get_label("nuclei")
 fig, axs = plt.subplots(1, 2, figsize=(10, 5))
 axs[0].imshow(image.on_disk_array[0, 0], cmap="gray")
 axs[1].imshow(nuclei.on_disk_array[0])
@@ -1827,8 +1814,8 @@ To do so, we can use the <code>.consolidate()</code> method.</p>
 </div>
 </clipboard-copy>
 </div>
-<div class="highlight-ipynb hl-python"><pre><span></span><span class="n">label_0</span> <span class="o">=</span> <span class="n">ngff_image</span><span class="o">.</span><span class="n">label</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"new_label"</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="s2">"0"</span><span class="p">)</span>
-<span class="n">label_2</span> <span class="o">=</span> <span class="n">ngff_image</span><span class="o">.</span><span class="n">label</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"new_label"</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="s2">"2"</span><span class="p">)</span>
+<div class="highlight-ipynb hl-python"><pre><span></span><span class="n">label_0</span> <span class="o">=</span> <span class="n">ngff_image</span><span class="o">.</span><span class="n">label</span><span class="o">.</span><span class="n">get_label</span><span class="p">(</span><span class="s2">"new_label"</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="s2">"0"</span><span class="p">)</span>
+<span class="n">label_2</span> <span class="o">=</span> <span class="n">ngff_image</span><span class="o">.</span><span class="n">label</span><span class="o">.</span><span class="n">get_label</span><span class="p">(</span><span class="s2">"new_label"</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="s2">"2"</span><span class="p">)</span>
 
 <span class="n">label_before_consolidation</span> <span class="o">=</span> <span class="n">label_2</span><span class="o">.</span><span class="n">on_disk_array</span><span class="p">[</span><span class="o">...</span><span class="p">]</span>
 
@@ -1847,8 +1834,8 @@ To do so, we can use the <code>.consolidate()</code> method.</p>
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
-<div class="clipboard-copy-txt" id="cell-9">label_0 = ngff_image.label.get("new_label", path="0")
-label_2 = ngff_image.label.get("new_label", path="2")
+<div class="clipboard-copy-txt" id="cell-9">label_0 = ngff_image.label.get_label("new_label", path="0")
+label_2 = ngff_image.label.get_label("new_label", path="2")
 
 label_before_consolidation = label_2.on_disk_array[...]
 
@@ -1920,12 +1907,12 @@ For a simple feature table the only reuiremnt is to have a integer column named 
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"List of feature table: </span><span class="si">{</span><span class="n">ngff_image</span><span class="o">.</span><span class="n">table</span><span class="o">.</span><span class="n">list</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">'feature_table'</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 
 
-<span class="n">nuclei</span> <span class="o">=</span> <span class="n">ngff_image</span><span class="o">.</span><span class="n">label</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'nuclei'</span><span class="p">)</span>
+<span class="n">nuclei</span> <span class="o">=</span> <span class="n">ngff_image</span><span class="o">.</span><span class="n">label</span><span class="o">.</span><span class="n">get_label</span><span class="p">(</span><span class="s1">'nuclei'</span><span class="p">)</span>
 
 <span class="c1"># Create a table with random features for each nuclei in each ROI</span>
 <span class="n">list_of_records</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="k">for</span> <span class="n">roi</span> <span class="ow">in</span> <span class="n">roi_table</span><span class="o">.</span><span class="n">list_rois</span><span class="p">:</span>
-    <span class="n">nuclei_in_roi</span> <span class="o">=</span> <span class="n">nuclei</span><span class="o">.</span><span class="n">array_from_roi</span><span class="p">(</span><span class="n">roi</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">'numpy'</span><span class="p">)</span>
+    <span class="n">nuclei_in_roi</span> <span class="o">=</span> <span class="n">nuclei</span><span class="o">.</span><span class="n">get_array_from_roi</span><span class="p">(</span><span class="n">roi</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">'numpy'</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">nuclei_id</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">nuclei_in_roi</span><span class="p">)[</span><span class="mi">1</span><span class="p">:]:</span>
         <span class="n">list_of_records</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
             <span class="p">{</span><span class="s2">"label"</span><span class="p">:</span> <span class="n">nuclei_id</span><span class="p">,</span>
@@ -1938,7 +1925,7 @@ For a simple feature table the only reuiremnt is to have a integer column named 
 
 <span class="c1"># Create a new feature table</span>
 <span class="n">feat_table</span> <span class="o">=</span> <span class="n">ngff_image</span><span class="o">.</span><span class="n">table</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">'new_feature_table'</span><span class="p">,</span>
-                     <span class="n">region</span><span class="o">=</span><span class="s1">'../nuclei'</span><span class="p">,</span>
+                     <span class="n">label_image</span><span class="o">=</span><span class="s1">'../nuclei'</span><span class="p">,</span>
                      <span class="n">table_type</span><span class="o">=</span><span class="s1">'feature_table'</span><span class="p">,</span>
                      <span class="n">overwrite</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
@@ -1954,12 +1941,12 @@ import pandas as pd
 print(f"List of feature table: {ngff_image.table.list(type='feature_table')}")
 
 
-nuclei = ngff_image.label.get('nuclei')
+nuclei = ngff_image.label.get_label('nuclei')
 
 # Create a table with random features for each nuclei in each ROI
 list_of_records = []
 for roi in roi_table.list_rois:
-    nuclei_in_roi = nuclei.array_from_roi(roi, mode='numpy')
+    nuclei_in_roi = nuclei.get_array_from_roi(roi, mode='numpy')
     for nuclei_id in np.unique(nuclei_in_roi)[1:]:
         list_of_records.append(
             {"label": nuclei_id,
@@ -1972,7 +1959,7 @@ feat_df = pd.DataFrame.from_records(list_of_records)
 
 # Create a new feature table
 feat_table = ngff_image.table.new(name='new_feature_table',
-                     region='../nuclei',
+                     label_image='../nuclei',
                      table_type='feature_table',
                      overwrite=True)
 
@@ -1998,33 +1985,122 @@ feat_table.table</div>
 </div>
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>New list of feature table: ['regionprops_DAPI', 'nuclei_measurements_wf3', 'nuclei_measurements_wf4', 'nuclei_lamin_measurements_wf4', 'new_feature_table']
+</pre>
+</div>
+</div>
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>
-<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
-<span class="ansi-red-fg">TypeError</span>                                 Traceback (most recent call last)
-Cell <span class="ansi-green-fg">In[10], line 24</span>
-<span class="ansi-green-intense-fg ansi-bold">     21</span> feat_df <span style="color: rgb(98,98,98)">=</span> pd<span style="color: rgb(98,98,98)">.</span>DataFrame<span style="color: rgb(98,98,98)">.</span>from_records(list_of_records)
-<span class="ansi-green-intense-fg ansi-bold">     23</span> <span style="color: rgb(95,135,135)"># Create a new feature table</span>
-<span class="ansi-green-fg">---&gt; 24</span> feat_table <span style="color: rgb(98,98,98)">=</span> <span class="ansi-yellow-bg">ngff_image</span><span class="ansi-yellow-bg" style="color: rgb(98,98,98)">.</span><span class="ansi-yellow-bg">table</span><span class="ansi-yellow-bg" style="color: rgb(98,98,98)">.</span><span class="ansi-yellow-bg">new</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">name</span><span class="ansi-yellow-bg" style="color: rgb(98,98,98)">=</span><span class="ansi-yellow-bg" style="color: rgb(175,0,0)">'</span><span class="ansi-yellow-bg" style="color: rgb(175,0,0)">new_feature_table</span><span class="ansi-yellow-bg" style="color: rgb(175,0,0)">'</span><span class="ansi-yellow-bg">,</span>
-<span class="ansi-green-intense-fg ansi-bold">     25</span> <span class="ansi-yellow-bg">                     </span><span class="ansi-yellow-bg">region</span><span class="ansi-yellow-bg" style="color: rgb(98,98,98)">=</span><span class="ansi-yellow-bg" style="color: rgb(175,0,0)">'</span><span class="ansi-yellow-bg" style="color: rgb(175,0,0)">../nuclei</span><span class="ansi-yellow-bg" style="color: rgb(175,0,0)">'</span><span class="ansi-yellow-bg">,</span>
-<span class="ansi-green-intense-fg ansi-bold">     26</span> <span class="ansi-yellow-bg">                     </span><span class="ansi-yellow-bg">table_type</span><span class="ansi-yellow-bg" style="color: rgb(98,98,98)">=</span><span class="ansi-yellow-bg" style="color: rgb(175,0,0)">'</span><span class="ansi-yellow-bg" style="color: rgb(175,0,0)">feature_table</span><span class="ansi-yellow-bg" style="color: rgb(175,0,0)">'</span><span class="ansi-yellow-bg">,</span>
-<span class="ansi-green-intense-fg ansi-bold">     27</span> <span class="ansi-yellow-bg">                     </span><span class="ansi-yellow-bg">overwrite</span><span class="ansi-yellow-bg" style="color: rgb(98,98,98)">=</span><span class="ansi-yellow-bg ansi-bold" style="color: rgb(0,135,0)">True</span><span class="ansi-yellow-bg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">     29</span> <span style="color: rgb(0,135,0)">print</span>(<span style="color: rgb(175,0,0)">f</span><span style="color: rgb(175,0,0)">"</span><span style="color: rgb(175,0,0)">New list of feature table: </span><span class="ansi-bold" style="color: rgb(175,95,135)">{</span>ngff_image<span style="color: rgb(98,98,98)">.</span>table<span style="color: rgb(98,98,98)">.</span>list(<span style="color: rgb(0,135,0)">type</span><span style="color: rgb(98,98,98)">=</span><span style="color: rgb(175,0,0)">'</span><span style="color: rgb(175,0,0)">feature_table</span><span style="color: rgb(175,0,0)">'</span>)<span class="ansi-bold" style="color: rgb(175,95,135)">}</span><span style="color: rgb(175,0,0)">"</span>)
-<span class="ansi-green-intense-fg ansi-bold">     30</span> feat_table<span style="color: rgb(98,98,98)">.</span>table <span style="color: rgb(98,98,98)">=</span> feat_df
+<pre>/opt/hostedtoolcache/Python/3.12.7/x64/lib/python3.12/site-packages/anndata/_core/anndata.py:1754: UserWarning: Observation names are not unique. To make them unique, call `.obs_names_make_unique`.
+  utils.warn_names_duplicates("obs")
+</pre>
+</div>
+</div>
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[10]:</div>
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
 
-File <span class="ansi-green-fg">/opt/hostedtoolcache/Python/3.12.6/x64/lib/python3.12/site-packages/ngio/tables/tables_group.py:146</span>, in <span class="ansi-cyan-fg">TableGroup.new</span><span class="ansi-blue-fg">(self, name, table_type, overwrite, version, **type_specific_kwargs)</span>
-<span class="ansi-green-intense-fg ansi-bold">    143</span>     list_of_tables<span style="color: rgb(98,98,98)">.</span>remove(name)
-<span class="ansi-green-intense-fg ansi-bold">    145</span> table_impl <span style="color: rgb(98,98,98)">=</span> _find_table_impl(table_type<span style="color: rgb(98,98,98)">=</span>table_type, version<span style="color: rgb(98,98,98)">=</span>version)
-<span class="ansi-green-fg">--&gt; 146</span> new_table <span style="color: rgb(98,98,98)">=</span> <span class="ansi-yellow-bg">table_impl</span><span class="ansi-yellow-bg" style="color: rgb(98,98,98)">.</span><span class="ansi-yellow-bg">_new</span><span class="ansi-yellow-bg">(</span>
-<span class="ansi-green-intense-fg ansi-bold">    147</span> <span class="ansi-yellow-bg">    </span><span class="ansi-yellow-bg">parent_group</span><span class="ansi-yellow-bg" style="color: rgb(98,98,98)">=</span><span class="ansi-yellow-bg" style="color: rgb(0,135,0)">self</span><span class="ansi-yellow-bg" style="color: rgb(98,98,98)">.</span><span class="ansi-yellow-bg">_group</span><span class="ansi-yellow-bg">,</span>
-<span class="ansi-green-intense-fg ansi-bold">    148</span> <span class="ansi-yellow-bg">    </span><span class="ansi-yellow-bg">name</span><span class="ansi-yellow-bg" style="color: rgb(98,98,98)">=</span><span class="ansi-yellow-bg">name</span><span class="ansi-yellow-bg">,</span>
-<span class="ansi-green-intense-fg ansi-bold">    149</span> <span class="ansi-yellow-bg">    </span><span class="ansi-yellow-bg">overwrite</span><span class="ansi-yellow-bg" style="color: rgb(98,98,98)">=</span><span class="ansi-yellow-bg">overwrite</span><span class="ansi-yellow-bg">,</span>
-<span class="ansi-green-intense-fg ansi-bold">    150</span> <span class="ansi-yellow-bg">    </span><span class="ansi-yellow-bg" style="color: rgb(98,98,98)">*</span><span class="ansi-yellow-bg" style="color: rgb(98,98,98)">*</span><span class="ansi-yellow-bg">type_specific_kwargs</span><span class="ansi-yellow-bg">,</span>
-<span class="ansi-green-intense-fg ansi-bold">    151</span> <span class="ansi-yellow-bg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    153</span> <span style="color: rgb(0,135,0)">self</span><span style="color: rgb(98,98,98)">.</span>_group<span style="color: rgb(98,98,98)">.</span>attrs[<span style="color: rgb(175,0,0)">"</span><span style="color: rgb(175,0,0)">tables</span><span style="color: rgb(175,0,0)">"</span>] <span style="color: rgb(98,98,98)">=</span> [<span style="color: rgb(98,98,98)">*</span>list_of_tables, name]
-<span class="ansi-green-intense-fg ansi-bold">    155</span> <span class="ansi-bold" style="color: rgb(0,135,0)">return</span> new_table
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
 
-<span class="ansi-red-fg">TypeError</span>: FeatureTableV1._new() got an unexpected keyword argument 'region'</pre>
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th></th>
+<th>feat1</th>
+<th>feat2</th>
+<th>ROI</th>
+</tr>
+<tr>
+<th>label</th>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>1</th>
+<td>0.294870</td>
+<td>0.487949</td>
+<td>FOV_1</td>
+</tr>
+<tr>
+<th>2</th>
+<td>0.769114</td>
+<td>0.657943</td>
+<td>FOV_1</td>
+</tr>
+<tr>
+<th>3</th>
+<td>0.210680</td>
+<td>0.674839</td>
+<td>FOV_1</td>
+</tr>
+<tr>
+<th>4</th>
+<td>0.642311</td>
+<td>0.571657</td>
+<td>FOV_1</td>
+</tr>
+<tr>
+<th>5</th>
+<td>0.592656</td>
+<td>0.369391</td>
+<td>FOV_1</td>
+</tr>
+<tr>
+<th>...</th>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr>
+<th>2987</th>
+<td>0.935184</td>
+<td>0.844011</td>
+<td>FOV_4</td>
+</tr>
+<tr>
+<th>2991</th>
+<td>0.465583</td>
+<td>0.034505</td>
+<td>FOV_4</td>
+</tr>
+<tr>
+<th>2993</th>
+<td>0.201067</td>
+<td>0.717154</td>
+<td>FOV_4</td>
+</tr>
+<tr>
+<th>2995</th>
+<td>0.976724</td>
+<td>0.591722</td>
+<td>FOV_4</td>
+</tr>
+<tr>
+<th>2996</th>
+<td>0.449914</td>
+<td>0.219791</td>
+<td>FOV_4</td>
+</tr>
+</tbody>
+</table>
+<p>3091 rows × 3 columns</p>
+</div>
 </div>
 </div>
 </div>
@@ -2087,7 +2163,7 @@ File <span class="ansi-green-fg">/opt/hostedtoolcache/Python/3.12.6/x64/lib/pyth
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">October 8, 2024</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">October 9, 2024</span>
   </span>
 
     
@@ -2097,7 +2173,7 @@ File <span class="ansi-green-fg">/opt/hostedtoolcache/Python/3.12.6/x64/lib/pyth
     <span class="md-icon" title="Created">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14.47 15.08 11 13V7h1.5v5.25l3.08 1.83c-.41.28-.79.62-1.11 1m-1.39 4.84c-.36.05-.71.08-1.08.08-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8c0 .37-.03.72-.08 1.08.69.1 1.33.32 1.92.64.1-.56.16-1.13.16-1.72 0-5.5-4.5-10-10-10S2 6.5 2 12s4.47 10 10 10c.59 0 1.16-.06 1.72-.16-.32-.59-.54-1.23-.64-1.92M18 15v3h-3v2h3v3h2v-3h3v-2h-3v-3z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">October 8, 2024</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">October 9, 2024</span>
   </span>
 
     

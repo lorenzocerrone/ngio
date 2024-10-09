@@ -1296,13 +1296,13 @@ image.pixel_size=PixelSize(x=0.65, y=0.65, z=1.0, unit=micrometer)
 </div>
 <div class="highlight-ipynb hl-python"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">"List of Labels: "</span><span class="p">,</span> <span class="n">ngff_image</span><span class="o">.</span><span class="n">label</span><span class="o">.</span><span class="n">list</span><span class="p">())</span>
 
-<span class="n">label_nuclei</span> <span class="o">=</span> <span class="n">ngff_image</span><span class="o">.</span><span class="n">label</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"nuclei"</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="s2">"0"</span><span class="p">)</span>
+<span class="n">label_nuclei</span> <span class="o">=</span> <span class="n">ngff_image</span><span class="o">.</span><span class="n">label</span><span class="o">.</span><span class="n">get_label</span><span class="p">(</span><span class="s2">"nuclei"</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="s2">"0"</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">label_nuclei</span><span class="o">.</span><span class="n">shape</span><span class="si">=}</span><span class="s2">"</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">label_nuclei</span><span class="o">.</span><span class="n">pixel_size</span><span class="si">=}</span><span class="s2">"</span><span class="p">)</span>
 </pre></div>
 <div class="clipboard-copy-txt" id="cell-4">print("List of Labels: ", ngff_image.label.list())
 
-label_nuclei = ngff_image.label.get("nuclei", path="0")
+label_nuclei = ngff_image.label.get_label("nuclei", path="0")
 print(f"{label_nuclei.shape=}")
 print(f"{label_nuclei.pixel_size=}")</div>
 </div>
@@ -1411,11 +1411,11 @@ print(" - Masking Roi tables: ", ngff_image.table.list(type='masking_roi_table')
 </clipboard-copy>
 </div>
 <div class="highlight-ipynb hl-python"><pre><span></span><span class="c1"># Loading a table</span>
-<span class="n">feature_table</span> <span class="o">=</span> <span class="n">ngff_image</span><span class="o">.</span><span class="n">table</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"regionprops_DAPI"</span><span class="p">)</span>
+<span class="n">feature_table</span> <span class="o">=</span> <span class="n">ngff_image</span><span class="o">.</span><span class="n">table</span><span class="o">.</span><span class="n">get_table</span><span class="p">(</span><span class="s2">"regionprops_DAPI"</span><span class="p">)</span>
 <span class="n">feature_table</span><span class="o">.</span><span class="n">table</span>
 </pre></div>
 <div class="clipboard-copy-txt" id="cell-6"># Loading a table
-feature_table = ngff_image.table.get("regionprops_DAPI")
+feature_table = ngff_image.table.get_table("regionprops_DAPI")
 feature_table.table</div>
 </div>
 </div>
@@ -1428,7 +1428,7 @@ feature_table.table</div>
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>/opt/hostedtoolcache/Python/3.12.6/x64/lib/python3.12/site-packages/anndata/_core/aligned_df.py:68: ImplicitModificationWarning: Transforming to str index.
+<pre>/opt/hostedtoolcache/Python/3.12.7/x64/lib/python3.12/site-packages/anndata/_core/aligned_df.py:68: ImplicitModificationWarning: Transforming to str index.
   warnings.warn("Transforming to str index.", ImplicitModificationWarning)
 </pre>
 </div>
@@ -1613,7 +1613,7 @@ feature_table.table</div>
 </clipboard-copy>
 </div>
 <div class="highlight-ipynb hl-python"><pre><span></span><span class="c1"># Loading a roi table</span>
-<span class="n">roi_table</span> <span class="o">=</span> <span class="n">ngff_image</span><span class="o">.</span><span class="n">table</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"FOV_ROI_table"</span><span class="p">)</span>
+<span class="n">roi_table</span> <span class="o">=</span> <span class="n">ngff_image</span><span class="o">.</span><span class="n">table</span><span class="o">.</span><span class="n">get_table</span><span class="p">(</span><span class="s2">"FOV_ROI_table"</span><span class="p">)</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">roi_table</span><span class="o">.</span><span class="n">list_field_indexes</span><span class="si">=}</span><span class="s2">"</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">roi_table</span><span class="o">.</span><span class="n">get_roi</span><span class="p">(</span><span class="s2">"FOV_1"</span><span class="p">)</span><span class="si">=}</span><span class="s2">"</span><span class="p">)</span>
@@ -1621,7 +1621,7 @@ feature_table.table</div>
 <span class="n">roi_table</span><span class="o">.</span><span class="n">table</span>
 </pre></div>
 <div class="clipboard-copy-txt" id="cell-7"># Loading a roi table
-roi_table = ngff_image.table.get("FOV_ROI_table")
+roi_table = ngff_image.table.get_table("FOV_ROI_table")
 
 print(f"{roi_table.list_field_indexes=}")
 print(f"{roi_table.get_roi("FOV_1")=}")
@@ -1859,7 +1859,7 @@ new_ngff_image.num_levels=5
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">October 8, 2024</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">October 9, 2024</span>
   </span>
 
     
@@ -1869,7 +1869,7 @@ new_ngff_image.num_levels=5
     <span class="md-icon" title="Created">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14.47 15.08 11 13V7h1.5v5.25l3.08 1.83c-.41.28-.79.62-1.11 1m-1.39 4.84c-.36.05-.71.08-1.08.08-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8c0 .37-.03.72-.08 1.08.69.1 1.33.32 1.92.64.1-.56.16-1.13.16-1.72 0-5.5-4.5-10-10-10S2 6.5 2 12s4.47 10 10 10c.59 0 1.16-.06 1.72-.16-.32-.59-.54-1.23-.64-1.92M18 15v3h-3v2h3v3h2v-3h3v-2h-3v-3z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">October 8, 2024</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">October 9, 2024</span>
   </span>
 
     
